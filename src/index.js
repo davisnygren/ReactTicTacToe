@@ -2,22 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-/*
-//Replaced by function component
-class Square extends React.Component {
-  render() {
-    return (
-      <button
-        className="square"
-        onClick={() => this.props.onClick()}
-      >
-        {this.props.value}
-      </button>
-    );
-  }
-}
-*/
-
 function Square(props) {
   return (
     <button className='square' onClick={props.onClick}>
@@ -65,6 +49,7 @@ class Game extends React.Component {
     this.state = {
       history: [{
         squares: Array(9).fill(null),
+        lastSquare: null,
       }],
       stepNumber: 0,
       xIsNext: true,
@@ -79,9 +64,11 @@ class Game extends React.Component {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
+    // history.lastSquare = i;
     this.setState({
       history: history.concat([{
         squares: squares,
+        lastSquare: i,
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
@@ -96,6 +83,14 @@ class Game extends React.Component {
     });
   }
 
+  iToXPosition(i) {
+    return i % 3;
+  }
+
+  iToYPosition(i) {
+    return Math.floor(i / 3);
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -103,7 +98,10 @@ class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Go to move #' + move :
+        'Go to move #' + move
+          + ' (' + this.iToXPosition(history[move].lastSquare) + ', '
+          + this.iToYPosition(history[move].lastSquare)
+          + ')' :
         'Go to game start';
       return (
         <li key = {move}>
