@@ -1,3 +1,7 @@
+# ReactTicTacToe
+
+![Game screenshot](screenshots/game.jpg?raw-true "Game Screenshot")
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
