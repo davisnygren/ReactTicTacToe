@@ -7,12 +7,13 @@
   "globals": {
     "nconf": true
   },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "plugins": ["react"],
   
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
+    "requireConfigFile": false,
     "ecmaFeatures": {
         "arrowFunctions": true,
         "binaryLiterals": true,
